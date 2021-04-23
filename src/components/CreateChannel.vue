@@ -1,6 +1,6 @@
 <template>
   <div class="createchannel-main">
-      <div class="title">Hi .........................</div>
+      <div class="title">Hi {{currentUser}}</div>
       <div class="welcome-msg">Welcome to Zing. <br> There is nothing here yet. Start by creating a channel</div>
       <div class="create">
           <div class="text">
@@ -12,8 +12,16 @@
 </template>
 
 <script>
-export default {
+import {computed} from 'vue';
+import {useStore} from 'vuex';
 
+export default {
+setup() {
+      const store = useStore();
+      return {
+        currentUser: computed(() => store.state.currentUser), //Shows up as an empty object
+      };
+    }
 }
 </script>
 
@@ -33,7 +41,10 @@ export default {
         height: 200px;
         width: 250px;
         margin: 30px auto;
-        border: 2px dashed #360167;
+        border: 2px dashed #8a9486;
+        &:hover {
+            cursor: pointer;
+        }
         .text {
             color: #8a9486;
             width: 150px;

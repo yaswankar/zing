@@ -7,8 +7,9 @@
 <script>
 import MainLayout from '../layouts/MainLayout.vue'
 import CreateChannel from '@/components/CreateChannel.vue'
-import {ref, onBeforeMount} from 'vue';
-import firebase from 'firebase';
+import {ref} from 'vue';
+// import firebase from 'firebase';
+// import {useStore} from 'vuex';
 
 export default {
    components: {
@@ -18,14 +19,13 @@ export default {
   setup() {
     const name = ref('');
     const component = ref('create-channel');
-    onBeforeMount(() => {
-      const user = firebase.auth().currentUser;
-      if(user) name.value = user.email.split('@')[0]
-    });
-
+    // const store = useStore(); 
+    // onBeforeMount(() => {
+     
+    // });
     return {
       name,
-      component
+      component,
     }
   }
 }

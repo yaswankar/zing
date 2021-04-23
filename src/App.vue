@@ -3,21 +3,26 @@
 </template>
 
 <script>
-import {onBeforeMount} from 'vue';
-import { useRouter, useRoute} from 'vue-router';
+import {onBeforeMount, ref} from 'vue';
+import { useRouter} from 'vue-router';
 import firebase from 'firebase';
+import { useStore } from 'vuex';
 
 export default {
   setup() {
     const router = useRouter();
-    const route = useRoute();
-
+    // const route = useRoute();
+    const store = useStore();
+    const name = ref('');
     onBeforeMount(() => {
       firebase.auth().onAuthStateChanged((user) => {
         if(!user) {
           router.replace('/login')
-        } else if(route.path == '/login' || route.path == '/register') {
-          router.replace('/');
+        } else {
+            name.value = user.email.split('@')[0];
+            store.commit('updateUser', name.value);
+            console.log(user);
+            router.replace('/');
         }
       })
     })
