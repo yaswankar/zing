@@ -33,6 +33,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.login {
+    text-align: center;
+}
 </style>
