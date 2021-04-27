@@ -1,8 +1,31 @@
 <template>
   <side-pane-modal :show="sideBarToggle" @close="close">
-   <div>Channels</div>
-   <div>Files</div>
-   <div>Actions</div>
+   <div class="close-modal" @click="close">&#10005;</div>
+   <div class="profile-section">
+     <img class="avatar" src="../../public/assets/user.jpg" alt="Avatar">
+     <div class="username">{{currentUser.username}}</div>
+     <div class="email">{{currentUser.email}}</div>
+     <div class="navigator">
+        <div class="channels">
+         <span>
+           <i class="fa fa-television"></i>
+         </span>
+         <span>Channels</span>
+        </div>
+       <div class="files">
+         <span>
+           <i class="fa fa-file-text-o"></i>
+         </span>
+         <span>Files</span>
+       </div>
+       <div class="actions">
+         <span>
+           <i class="fa fa-tasks"></i>
+         </span>
+         <span>Actions</span>
+       </div>
+     </div>
+   </div>
   </side-pane-modal>
   <div class="LayoutDefault">
    <nav class="LayoutDefault__nav">
@@ -10,7 +33,7 @@
         <i class="fa fa-navicon" @click="openSidebar" style="font-size: 28px"></i>
       </div>
       <div class="LayoutDefault__user">
-        <div class="user-icon" @click="openUser">{{currentUser? currentUser[0].toUpperCase() : ''}}</div>
+        <div class="user-icon" @click="openUser">{{currentUser? currentUser.username[0].toUpperCase() : ''}}</div>
         <div id="myDropdown" v-if="userToggle" class="dropdown-content">
           <a href="#home">Settings</a>
           <a href="#about">Contact</a>
@@ -35,8 +58,8 @@ import {ref, computed, onMounted, onBeforeUnmount} from 'vue';
 import {useStore} from 'vuex';
 
 export default {
+  name: 'main-layout',
 	components: { SidePaneModal },
-    name: 'main-layout',
     setup() {
         const sideBarToggle = ref(false);
         const userToggle = ref(false);
@@ -80,7 +103,63 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.close-modal {
+  color: black; 
+  font-size: 30px; 
+  float: right; 
+  margin: 10px 15px 0 0;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.profile-section {
+    width: 100%; 
+    margin-top: 100px; 
+    text-align: center;
+  .avatar {
+    width:70px; 
+    height: 70px;
+    border-radius: 50%;
+  }
+  .username {
+    margin-top: 20px; 
+    font-size: 18px; 
+    font-weight: 700;
+    color: #360167;
+  }
+  .email {
+    font-size: 14px;
+  }
+  .navigator {
+    padding: 10px;
+    margin-top: 50px;
+    text-align: left;
+    .channels, .files, .actions {
+      height: 35px;
+      padding: 10px;
+      box-sizing: border-box;
+      color: grey;
+      span {
+        margin-left: 10px;
+      }
+      &:hover {
+        color: #360167;
+        user-select: none;
+        font-weight: 700;
+        cursor: pointer;
+      }
+    }
+    .files {
+      span:nth-child(2) {
+        margin-left: 15px;        
+      }
+    }
+    .channels ~ div {
+      border-top: 1px solid #eee;
+    }
+  }
+}
 .LayoutDefault {
   max-width: 100%;
   margin-right: auto;
@@ -134,7 +213,7 @@ export default {
         text-decoration: none;
         display: block;
         &:hover {
-          background: #fafbfb;
+          background: lightgray;
         }
       }
     }

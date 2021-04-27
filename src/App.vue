@@ -20,7 +20,7 @@ export default {
           router.replace('/login')
         } else {
             name.value = user.email.split('@')[0];
-            store.commit('updateUser', name.value);
+            store.commit('updateUser', {username: name.value, email: user.email});
             console.log(user);
             router.replace('/');
         }

@@ -1,7 +1,14 @@
 <template>
-  <transition name="modal">
-    <div class="modal-mask" @click="close" v-show="show">
-      <div class="modal-container" @click.stop>
+  <transition name="center-modal">
+    <div
+      class="center-modal-mask"
+      @click="close"
+      v-show="show"
+    >
+      <div
+        class="center-modal-container"
+        @click.stop
+      >
         <slot></slot>
       </div>
     </div>
@@ -10,9 +17,9 @@
 
 <script>
 export default {
-  name: "side-pane-modal",
+  name: "center-pane-modal",
   props: ["show"],
-  mounted() {
+  mounted () {
     document.addEventListener("keydown", (e) => {
       if (this.show && e.keyCode == 27) {
         this.close();
@@ -32,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal-mask {
+.center-modal-mask {
   position: fixed;
   z-index: 9998;
   top: 0;
@@ -42,35 +49,36 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
   transition: opacity 0.3s;
 }
-.modal-container {
-  width: 300px;
-  height: 100%;
-  overflow-y: auto;
-  float: left;
-  background-color: white;
+.center-modal-container {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -40%);
+  height: auto;
+  background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease-in-out;
-  font-family: Helvetica, Arial, sans-serif;
+  transition: all 0.3s ease;
+  font-family: Lato, sans-serif;
 }
 
 /*
  * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
+ * transition="center-modal" when their visibility is toggled
  * by Vue.js.
  *
  */
 
-.modal-enter-from {
+.center-modal-enter-from {
   opacity: 0;
 }
 
-.modal-leave-active {
+.center-modal-leave-active {
   opacity: 0;
 }
 
-.modal-enter-from .modal-container,
-.modal-leave-active .modal-container {
+.center-modal-enter-from .center-modal-container,
+.center-modal-leave-active .center-modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
