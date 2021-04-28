@@ -5,8 +5,10 @@
 </template>
 
 <script>
-import MainLayout from '../layouts/MainLayout.vue'
-import CreateChannel from '@/components/CreateChannel.vue'
+import MainLayout from '../layouts/MainLayout.vue';
+import CreateChannel from '@/components/CreateChannel.vue';
+import ChannelLayout from '../layouts/ChannelLayout.vue';
+import Channel from '../components/Channel/Channel.vue'
 import {ref} from 'vue';
 // import firebase from 'firebase';
 // import {useStore} from 'vuex';
@@ -14,11 +16,13 @@ import {ref} from 'vue';
 export default {
    components: {
     MainLayout,
-    CreateChannel
+    CreateChannel,
+    ChannelLayout,
+    Channel
   },
   setup() {
     const name = ref('');
-    const component = ref('create-channel');
+    const component = ref('channel');
     // const store = useStore(); 
     // onBeforeMount(() => {
      

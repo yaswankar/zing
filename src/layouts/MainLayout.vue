@@ -3,8 +3,8 @@
    <div class="close-modal" @click="close">&#10005;</div>
    <div class="profile-section">
      <img class="avatar" src="../../public/assets/user.jpg" alt="Avatar">
-     <div class="username">{{currentUser.username}}</div>
-     <div class="email">{{currentUser.email}}</div>
+     <div class="username">{{currentUser ? currentUser.username: ''}}</div>
+     <div class="email">{{currentUser ? currentUser.email: ''}}</div>
      <div class="navigator">
         <div class="channels">
          <span>
@@ -45,9 +45,9 @@
     <main class="LayoutDefault__main">
       <slot/>
     </main>
-    <footer class="LayoutDefault__footer">
+    <!-- <footer class="LayoutDefault__footer">
       &copy; Awesome Company
-    </footer>
+    </footer> -->
     </div>
 </template>
 
@@ -219,17 +219,11 @@ export default {
     }
   }
 
-  &__main {
-    padding-top: 1.5em;
-    padding-bottom: 2em;
-    background: #fafbfb;
-  }
-
-  &__footer {
-    padding-top: 1em;
-    padding-bottom: 1em;
-    border-top: 1px solid #c0c0c0;
-  }
+  // &__footer {
+  //   padding-top: 1em;
+  //   padding-bottom: 1em;
+  //   border-top: 1px solid #c0c0c0;
+  // }
 }
 
 </style>

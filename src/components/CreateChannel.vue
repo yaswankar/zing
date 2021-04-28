@@ -1,21 +1,5 @@
 <template>
-  <center-pane-modal :show="showChannelCreateModal" @close="close">
-    <div class="modal-container">
-        <div class="title">
-            <span>Create Channel</span>
-            <span class="close-modal" @click="close">&#10005;</span>
-        </div>
-        <div class="description">
-            <p>A channel is a lightweight space where you can communicate and collaborate with anyone to get work done</p>
-            <div class="channel-header">Channel Name</div>
-            <input class="channel-name" type="text">
-            <div class="actions">
-                <button>Create</button>
-                <button @click="close">Cancel</button>
-            </div>
-        </div>
-    </div>
-  </center-pane-modal>
+  <create-channel-modal :showChannelCreateModal="showChannelCreateModal" @close="close"/>
   <div class="createchannel-main">
       <div class="title">Hi {{currentUser.username}}</div>
       <div class="welcome-msg">Welcome to Zing. <br> There is nothing here yet. Start by creating a channel</div>
@@ -31,11 +15,11 @@
 <script>
 import {computed, ref} from 'vue';
 import {useStore} from 'vuex';
-import CenterPaneModal from '../components/modals/CenterPaneModal.vue';
+import CreateChannelModal from '../components/modals/CreateChannelModal.vue';
 
 export default {
     name: 'create-channel',
-    components: { CenterPaneModal },
+    components: { CreateChannelModal },
     setup() {
         const store = useStore();
         const showChannelCreateModal = ref(false);
@@ -56,61 +40,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal-container {
-    width: 500px;
-    .title {
-        padding: 20px;
-        box-sizing: border-box;
-        font-size: 18px;
-        background: rgb(216, 216, 216);
-        .close-modal {
-            float: right;
-            font-size: 20px;
-            &:hover {
-                user-select: none;
-                cursor: pointer;
-            }
-        }
-    }
-    .description {
-        padding: 20px;
-        box-sizing: border-box;
-        p {
-            font-size: 14px;
-            color: rgb(107, 106, 106);
-        }
-        .channel-header {
-            margin-top: 30px;
-            font-size: 15px;
-        }
-        .channel-name {
-            margin-top: 15px;
-            font-size: 15px;
-            height: 30px;
-            width: 99%;
-            font-size: 15px;
-        }
-        .actions {
-            width: 250px;
-            margin: 30px auto;
-            text-align: center;
-            box-sizing: border-box;
-            button {
-                margin-right: 20px;
-                height: 30px;
-                height: 35px;
-                width: 105px;
-                color: #fff;
-                font-weight: 700;
-                border: 1px solid #fff;
-                border-radius: 5px;
-                background: rgba(54, 1, 103, 0.5);
-            }
-        }
-    }
-}
 .createchannel-main {
     text-align: center;
+    padding-top: 1.5em;
+    padding-bottom: 2em;
+    background: #fafbfb;
     .title {
         color: #360167;
         font-size: 32px;
