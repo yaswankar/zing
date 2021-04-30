@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 .fa {
-    color: #360167;
+    color: #017075;
 }
 .header {
     width: 100%;
@@ -46,8 +46,8 @@ export default {
     button {
         font-size: 20px;
         background: #fff;
-        border: 1px solid rgba(54, 1, 103, 0.5);
-        color: #360167;
+        border: 1px solid rgba(1, 112, 117, 0.5);
+        color: #017075;
         border-radius: 3px;
         &:focus {
             outline: none;

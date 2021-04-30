@@ -46,7 +46,7 @@ export default {
     padding-bottom: 2em;
     background: #fafbfb;
     .title {
-        color: #360167;
+        color: #017075;
         font-size: 32px;
     }
     .welcome-msg {

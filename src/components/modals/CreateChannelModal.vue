@@ -84,7 +84,7 @@ export default {
                 font-weight: 700;
                 border: 1px solid #fff;
                 border-radius: 5px;
-                background: rgba(54, 1, 103, 0.5);
+                background: rgba(1, 112, 117, 0.5);
             }
         }
     }

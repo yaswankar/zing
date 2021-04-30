@@ -7,6 +7,14 @@
       <template #rightSidebar>
           <right-sidebar/>
       </template>
+      <template #channel-content>
+          <div class="channel-content">Channel Content</div>
+          <div class="text-editor">
+              <div class="text-editor__container">
+                 <input type="text" placeholder="Say something... or use @ to mention someone">
+              </div>
+          </div>
+      </template>
   </channel-layout>
 </template>
 
@@ -39,4 +47,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+ .channel-content {
+    height: calc(100% - 100px);
+ }
+ .text-editor {
+    height: 65px;
+    width: 100%;
+    border-top: 1px solid #e7e7e7;
+    background: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    &__container {
+        width: 100%;
+        input {
+            background: #f1f2f4; 
+            height: 35px; 
+            width: calc(100% - 10px); 
+            border: 1px solid #fff; 
+            border-radius: 5px;
+            &:focus {
+                box-shadow: 0px 0px 2px 2px#017075;
+                outline: none;
+            }
+        }
+    }
+ }
 </style>

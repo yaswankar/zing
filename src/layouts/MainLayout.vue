@@ -126,7 +126,7 @@ export default {
     margin-top: 20px; 
     font-size: 18px; 
     font-weight: 700;
-    color: #360167;
+    color: #017075;
   }
   .email {
     font-size: 14px;
@@ -144,7 +144,7 @@ export default {
         margin-left: 10px;
       }
       &:hover {
-        color: #360167;
+        color: #017075;
         user-select: none;
         font-weight: 700;
         cursor: pointer;
@@ -169,8 +169,9 @@ export default {
     padding-top: 0.5em;
     padding-bottom: 1em;
     border-bottom: 1px solid #c0c0c0;
-    height: 20px;
+    height: 45px;
     display: flex;
+    box-sizing: border-box; 
     .toggler {
         width: calc(100% - 80px);
         padding: 0 10px;
@@ -194,7 +195,7 @@ export default {
         text-align: center;
         border-radius: 50%;
         color: white;
-        background: #360167;
+        background: #017075;
     }
     .dropdown-content {
       display: block;
@@ -217,6 +218,9 @@ export default {
         }
       }
     }
+  }
+  &__main {
+    height: calc(100vh - 45px);
   }
 
   // &__footer {

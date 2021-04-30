@@ -15,6 +15,7 @@
         <i :class="{'fa fa-angle-double-left': !rightNav, 'fa fa-angle-double-right': rightNav}"></i>
       </button>
     </div>
+    <slot name="channel-content"></slot>
   </div>
 </template>
 
@@ -95,11 +96,15 @@ export default {
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #channel-main {
   transition: margin .5s; /* If you want a transition effect */
+  background: #fafbfb;
+  height: 100%;
   padding: 5px 0;
+  box-sizing: border-box;
   .collpasible-actions {
     width: 100%;
+    height: 40px;
     button {
-      background: rgba(54, 1, 103, 0.5);
+      background: rgba(1, 112, 117, 0.5);
       color: white;
       border: 1px solid #fff;
       height: 30px;
@@ -114,10 +119,10 @@ export default {
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .leftSidebar {padding-top: 15px;}
-  .rightSidebar {padding-top: 15px;}
-}
+// @media screen and (max-height: 450px) {
+//   .leftSidebar {padding-top: 15px;}
+  // .rightSidebar {padding-top: 15px;}
+// }
 
 
 
