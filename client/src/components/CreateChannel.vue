@@ -1,7 +1,7 @@
 <template>
   <create-channel-modal :showChannelCreateModal="showChannelCreateModal" @close="close"/>
   <div class="createchannel-main">
-      <div class="title">Hi {{currentUser.username}}</div>
+      <div class="title">Hi {{currentUser ? currentUser.username : '' }}</div>
       <div class="welcome-msg">Welcome to Zing. <br> There is nothing here yet. Start by creating a channel</div>
       <div class="create" @click="openPopup">
           <div class="text">

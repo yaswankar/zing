@@ -12,17 +12,19 @@
 
 <script>
 import firebase from 'firebase';
-import {ref} from 'vue';
+import {ref, inject} from 'vue';
 
 export default {
     setup() {
         const email = ref('');
         const password = ref('');
-
+        const $zingService = inject('$zingService');
         const Register = () => {
             console.log('email', email);
             firebase.auth().createUserWithEmailAndPassword(email.value.trim(), password.value)
-            .then(user => alert(user))
+            .then(async () => {
+                await $zingService.User.createUser({userName: email.value})
+            })
             .catch(err => alert(err.message));
         }
         return {

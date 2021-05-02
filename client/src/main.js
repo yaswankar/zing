@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import firebase from 'firebase';
-import firebaseService from './services/firebaseService';
+import zingService from './services/zingService';
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1e9fKVguI4tryfKOBwdYUzMDWB4tAlSs",
@@ -17,5 +17,5 @@ const firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
 
 
-createApp(App).use(store).use(router).provide('$firebaseService', firebaseService).mount('#app')
+createApp(App).use(store).use(router).provide('$zingService', zingService).mount('#app')
 

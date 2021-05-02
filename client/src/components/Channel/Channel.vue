@@ -8,10 +8,11 @@
           <right-sidebar/>
       </template>
       <template #channel-content>
-          <div class="channel-content">Channel Content</div>
+          <div class="channel-content"></div>
           <div class="text-editor">
               <div class="text-editor__container">
                  <input type="text" placeholder="Say something... or use @ to mention someone">
+                 <span class="send-icon"><i class="fa fa-send"></i></span>
               </div>
           </div>
       </template>
@@ -62,12 +63,26 @@ export default {
         input {
             background: #f1f2f4; 
             height: 35px; 
-            width: calc(100% - 10px); 
+            width: calc(100% - 80px); 
             border: 1px solid #fff; 
             border-radius: 5px;
+            margin-left: 10px;
             &:focus {
                 box-shadow: 0px 0px 2px 2px#017075;
                 outline: none;
+            }
+        }
+        .send-icon {
+            margin-left: 20px;
+            color: #017075;
+            border-radius: 50%;
+            height: 40px;
+            padding: 10px;
+            &:hover {
+                background: #017075;
+                color: white;
+                transition: 0.3s;
+                cursor: pointer;
             }
         }
     }

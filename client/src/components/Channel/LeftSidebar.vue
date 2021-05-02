@@ -15,13 +15,17 @@
                 </span>
               </div>
           </div>
+          <channel-item :title="'Uncategorized Channels'"/>
+          <channel-item :title="'Direct Messages'"/>
 </template>
 
 <script>
+import ChannelItem from './ChannelItem.vue';
 
 export default {
     name: 'left-side-bar',
     emits: ['toggleModal'],
+    components: { ChannelItem },
     setup(props, context) {
         const emitToggle = () => {
             context.emit('toggleModal', true);

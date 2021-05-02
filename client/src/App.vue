@@ -21,7 +21,6 @@ export default {
         } else {
             name.value = user.email.split('@')[0];
             store.commit('updateUser', {username: name.value, email: user.email});
-            console.log(user);
             router.replace('/');
         }
       })
