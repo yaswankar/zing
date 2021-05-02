@@ -20,7 +20,6 @@ export default {
         const password = ref('');
         const $zingService = inject('$zingService');
         const Register = () => {
-            console.log('email', email);
             firebase.auth().createUserWithEmailAndPassword(email.value.trim(), password.value)
             .then(async () => {
                 await $zingService.User.createUser({userName: email.value})

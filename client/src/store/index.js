@@ -6,7 +6,6 @@ export default createStore({
   },
   mutations: {
     updateUser(state, payload) {
-      console.log('updating');
       state.currentUser = payload;
     }
   },

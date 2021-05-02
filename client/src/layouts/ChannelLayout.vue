@@ -37,7 +37,6 @@ export default {
         });
         /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
         const toggleLeftNav = () => {
-          console.log('going in');
           leftNav.value = !leftNav.value;
           if(leftNav.value) {
             document.getElementById("myLeftSidebar").style.width = "250px";
@@ -50,7 +49,6 @@ export default {
 
          /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
         const toggleRightNav = () => {
-          console.log('going in');
           rightNav.value = !rightNav.value
           if(rightNav.value) {
             document.getElementById("myRightSidebar").style.width = "350px";
