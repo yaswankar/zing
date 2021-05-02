@@ -16,4 +16,15 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.post('/', async (req, res) => {
+    const newChannel = new ChannelSchema(req.body)
+    try {
+        const channel = await newChannel.save()
+        if (!channel) throw new Error('Something went wrong saving the channel')
+        res.status(200).json(channel)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
 module.exports = router

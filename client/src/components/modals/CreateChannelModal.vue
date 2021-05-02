@@ -8,9 +8,9 @@
         <div class="description">
             <p>A channel is a lightweight space where you can communicate and collaborate with anyone to get work done</p>
             <div class="channel-header">Channel Name</div>
-            <input class="channel-name" type="text">
+            <input class="channel-name" type="text" v-model="channelName">
             <div class="actions">
-                <button>Create</button>
+                <button @click="createChannel">Create</button>
                 <button @click="$emit('close', false)">Cancel</button>
             </div>
         </div>
@@ -19,7 +19,9 @@
 </template>
 
 <script>
+import {ref, inject} from 'vue';
 import CenterPaneModal from '../modals/CenterPaneModal.vue';
+
 export default {
     name: 'create-channel-modal',
     props: [
@@ -30,6 +32,18 @@ export default {
     ],
     components: {
         CenterPaneModal
+    },
+    setup(props, context) {
+        const channelName = ref('');
+        const $zingService = inject('$zingService');
+        const createChannel = () => {
+            $zingService.Channel.createChannel({ channelName: channelName.value})
+            .then(() => context.emit('close'));
+        }
+        return {
+            channelName,
+            createChannel
+        }
     }
 
 }

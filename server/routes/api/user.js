@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const newUser = new userItems(req.body)
+    const newUser = new UserSchema(req.body)
     try {
         const userItem = await newUser.save()
         if (!userItem) throw new Error('Something went wrong saving the user')
