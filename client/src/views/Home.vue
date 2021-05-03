@@ -1,32 +1,25 @@
 <template>
- <main-layout>
-   <component v-bind:is="component"/>
- </main-layout>
+   <router-view />
 </template>
 
 <script>
-import MainLayout from '../layouts/MainLayout.vue';
-import CreateChannel from '@/components/CreateChannel.vue';
-import ChannelLayout from '../layouts/ChannelLayout.vue';
-import Channel from '../components/Channel/Channel.vue'
-import {ref, inject, onBeforeMount} from 'vue';
-// import firebase from 'firebase';
-// import {useStore} from 'vuex';
+import {ref, onBeforeMount} from 'vue';
+import {useRouter} from 'vue-router';
+import { useStore } from 'vuex';
 
 export default {
-   components: {
-    MainLayout,
-    CreateChannel,
-    ChannelLayout,
-    Channel
-  },
   setup() {
     const name = ref('');
     const component = ref('channel');
-    const $zingService = inject('$zingService');
+    // const $zingService = inject('$zingService');
+    const router = useRouter();
+    const store = useStore();
     onBeforeMount(async() => {
-      const channels = await $zingService.Channel.getChannels();
-      if(channels.length === 0) component.value = 'create-channel'
+      await store.dispatch('getChannels');
+      if(store.state.channels.length !== 0) {
+        console.log('Hello');
+        router.push({ path: '/channels' })
+      } else router.push({ path: '/createChannel' })
     });
     return {
       name,

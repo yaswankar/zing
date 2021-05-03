@@ -10,29 +10,37 @@
         <span class="title">{{title}}</span>
         </div>
         <transition name="slide-fade">
-            <div class="empty-wrapper" v-if="emptyWrapper && expand">
+            <div v-if="expand" style="max-height: 225px; overflow: auto; margin-top: 5px;">
+            <div class="empty-wrapper" v-if="!channels.length">
                 You do not have any direct messages yets
+            </div>
+            <div class="channel-menu-item" v-else v-for="(channel, index) in channels" v-bind:key="index">{{channel.channelName}}</div>
             </div>
         </transition>
   </div>
 </template>
 
 <script>
-import {ref} from 'vue';
+import {ref, computed} from 'vue';
+import {useStore} from 'vuex';
 
 export default {
     name: 'channel-item',
     props: ['title'],
-    setup() {
+    setup(props) {
         const expand = ref(false);
-        const emptyWrapper = ref(true);
+        const store = useStore();
         const expandCollapse = () => {
             expand.value = !expand.value;
         }
         return {
             expand,
-            emptyWrapper,
-            expandCollapse
+            expandCollapse,
+            channels: computed(() => {
+                if(props.title !== 'Direct Messages') 
+                  return store.state.channels
+                else return []
+                }),
         }
     }
 }
@@ -82,6 +90,22 @@ export default {
         padding: 15px;
         box-sizing: border-box;
         border-radius: 5px;
+    }
+    .channel-menu-item {
+        padding: 10px 10px 10px 20px;
+        border-bottom: 1px solid #e7e7e7;
+        box-sizing: border-box;
+        font-size: 13px;
+        color: #4e4f52;
+        vertical-align: middle;
+        height: auto;
+        &:first-child {
+           padding: 20px 10px 10px 20px; 
+        }
+        &:last-child {
+            border-bottom: 1px solid #fff;
+            padding: 10px 10px 0px 20px;
+        }
     }
  }
 </style>

@@ -1,4 +1,5 @@
 <template>
+<main-layout>
   <create-channel-modal :showChannelCreateModal="showChannelCreateModal" @close="close"/>
   <div class="createchannel-main">
       <div class="title">Hi {{currentUser ? currentUser.username : '' }}</div>
@@ -10,16 +11,18 @@
           </div>
       </div>
   </div>
+</main-layout>
 </template>
 
 <script>
 import {computed, ref} from 'vue';
 import {useStore} from 'vuex';
+import MainLayout from '../layouts/MainLayout.vue'
 import CreateChannelModal from '../components/modals/CreateChannelModal.vue';
 
 export default {
     name: 'create-channel',
-    components: { CreateChannelModal },
+    components: { CreateChannelModal, MainLayout },
     setup() {
         const store = useStore();
         const showChannelCreateModal = ref(false);

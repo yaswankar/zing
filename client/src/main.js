@@ -5,6 +5,8 @@ import store from './store'
 import firebase from 'firebase';
 import zingService from './services/zingService';
 
+import './styles/global.scss';
+
 const firebaseConfig = {
     apiKey: "AIzaSyB1e9fKVguI4tryfKOBwdYUzMDWB4tAlSs",
     authDomain: "vue-chat-975c2.firebaseapp.com",

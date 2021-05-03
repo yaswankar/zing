@@ -1,4 +1,5 @@
 <template>
+<main-layout>
   <create-channel-modal :showChannelCreateModal="showChannelCreateModal" @close="toggleChannelCreation"/>
   <channel-layout>
       <template #leftSidebar>
@@ -17,10 +18,12 @@
           </div>
       </template>
   </channel-layout>
+  </main-layout>
 </template>
 
 <script>
 import {ref} from 'vue';
+import MainLayout from '../../layouts/MainLayout.vue';
 import ChannelLayout from '../../layouts/ChannelLayout.vue';
 import CreateChannelModal from '../modals/CreateChannelModal.vue';
 import LeftSidebar from './LeftSidebar.vue';
@@ -29,6 +32,7 @@ import RightSidebar from './RightSidebar.vue'
 export default {
     name: 'channel',
     components: {
+        MainLayout,
         ChannelLayout,
         LeftSidebar,
         RightSidebar,

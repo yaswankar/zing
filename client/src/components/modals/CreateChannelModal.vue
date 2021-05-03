@@ -21,6 +21,7 @@
 <script>
 import {ref, inject} from 'vue';
 import CenterPaneModal from '../modals/CenterPaneModal.vue';
+import { useStore } from 'vuex';
 
 export default {
     name: 'create-channel-modal',
@@ -36,9 +37,13 @@ export default {
     setup(props, context) {
         const channelName = ref('');
         const $zingService = inject('$zingService');
+        const store = useStore();
         const createChannel = () => {
             $zingService.Channel.createChannel({ channelName: channelName.value})
-            .then(() => context.emit('close'));
+            .then(async() => {
+                await store.dispatch('getChannels');
+                context.emit('close');
+            });
         }
         return {
             channelName,
