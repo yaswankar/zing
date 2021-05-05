@@ -21,11 +21,6 @@ const routes = [
     component: () => import('../views/Login.vue')
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: () => import('../views/Register.vue')
-  },
-  {
     path: '/createchannel',
     name: 'CreateChannel',
     component: () => import('../components/CreateChannel.vue')
