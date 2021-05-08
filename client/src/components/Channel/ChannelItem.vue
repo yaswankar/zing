@@ -14,7 +14,7 @@
             <div class="empty-wrapper" v-if="!channels.length">
                 You do not have any direct messages yets
             </div>
-            <div class="channel-menu-item" v-else v-for="(channel, index) in channels" v-bind:key="index">{{channel.channelName}}</div>
+            <div class="channel-menu-item" v-else v-for="(channel, index) in channels" v-bind:key="index" @click="updateSelectedChannel(channel.channelName)">{{channel.channelName}}</div>
             </div>
         </transition>
   </div>
@@ -33,14 +33,19 @@ export default {
         const expandCollapse = () => {
             expand.value = !expand.value;
         }
-        return {
-            expand,
-            expandCollapse,
-            channels: computed(() => {
+        const channels =  computed(() => {
                 if(props.title !== 'Direct Messages') 
                   return store.state.channels
                 else return []
-                }),
+        });
+        const updateSelectedChannel = (name) => {
+            store.commit('updateSelectedChannel', name);
+        }
+        return {
+            expand,
+            expandCollapse,
+            channels,
+            updateSelectedChannel
         }
     }
 }

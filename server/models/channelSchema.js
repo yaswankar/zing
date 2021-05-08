@@ -5,12 +5,16 @@ const ChannelSchema = new Schema({
         type: String,
         required: true,
     },
+    users: {
+        type: Array,
+        default: [],
+    },
     date: {
         type: Date,
         default: Date.now,
     },
-})
+});
 
 const Channel = model('Channel', ChannelSchema);
 
-module.exports = Channel
+module.exports = {Channel}

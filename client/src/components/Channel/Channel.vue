@@ -1,6 +1,7 @@
 <template>
 <main-layout>
   <create-channel-modal :showChannelCreateModal="showChannelCreateModal" @close="toggleChannelCreation"/>
+  <add-user-modal :showAddUserModal="showAddUserModal" @close="toggleUserAddModal"/>
   <channel-layout>
       <template #leftSidebar>
           <left-sidebar @toggleModal="toggleChannelCreation"/>
@@ -9,7 +10,12 @@
           <right-sidebar/>
       </template>
       <template #channel-content>
-          <div class="channel-content"></div>
+          <div class="channel-content">
+              <div class="channel-space">
+                <span class="channel-name">{{selectedChannel}}</span>
+                <span class="channel-users has-count" @click="toggleUserAddModal(true)" :data-count="userCount"><i class="fa fa-users" aria-hidden="true"></i></span>
+              </div>
+          </div>
           <div class="text-editor">
               <div class="text-editor__container">
                  <input type="text" placeholder="Say something... or use @ to mention someone">
@@ -22,10 +28,12 @@
 </template>
 
 <script>
-import {ref} from 'vue';
+import {ref, computed} from 'vue';
+import {useStore} from 'vuex';
 import MainLayout from '../../layouts/MainLayout.vue';
 import ChannelLayout from '../../layouts/ChannelLayout.vue';
 import CreateChannelModal from '../modals/CreateChannelModal.vue';
+import AddUserModal from '../modals/AddUserModal.vue';
 import LeftSidebar from './LeftSidebar.vue';
 import RightSidebar from './RightSidebar.vue'
 
@@ -36,16 +44,33 @@ export default {
         ChannelLayout,
         LeftSidebar,
         RightSidebar,
-        CreateChannelModal
+        CreateChannelModal,
+        AddUserModal
     },
     setup() {
+        const store = useStore();
         const showChannelCreateModal = ref(false);
+        const showAddUserModal = ref(false);
         const toggleChannelCreation = (val) => {
             showChannelCreateModal.value = val;
         }
+        const toggleUserAddModal = (val) => {
+            showAddUserModal.value = val;
+        }
         return {
             showChannelCreateModal,
-            toggleChannelCreation
+            showAddUserModal,
+            toggleChannelCreation,
+            toggleUserAddModal,
+            selectedChannel: computed(() => store.state.selectedChannel),
+            userCount: computed(() => {
+                if(store.state.channels) {
+                    const channel = store.state.channels.find(item => item.channelName === store.state.selectedChannel);
+                    if(channel) return channel.users.length;
+                    else return 0;
+                }
+                else return 0;
+            })     
         };
     }
 }
@@ -54,6 +79,36 @@ export default {
 <style lang="scss" scoped>
  .channel-content {
     height: calc(100% - 100px);
+    .channel-space {
+        position: relative;
+        top: -30px;
+        margin: 0 30px 0 30px;
+        .channel-name {
+        }
+        .channel-users {
+            float: right;
+            font-size: 20px;
+            padding-right: 10px;
+            i {
+                color: #8a94a6;
+            }
+        }
+        .has-count[data-count]:after {
+            position: absolute;
+            right: 0;
+            top: 16px;
+            content: attr(data-count);
+            font-size: 10px;
+            padding: 0.1em;
+            border-radius: 50%;
+            line-height: 1.3em;
+            color: white;
+            background: #017075;
+            text-align: center;
+            min-width: 1.5em;
+            font-weight: bold;
+        }
+    }
  }
  .text-editor {
     height: 65px;

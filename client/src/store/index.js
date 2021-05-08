@@ -5,6 +5,7 @@ export default createStore({
   state: {
     currentUser: null,
     channels: [],
+    selectedChannel: ''
   },
   mutations: {
     updateUser(state, payload) {
@@ -12,6 +13,10 @@ export default createStore({
     },
     updateChannels(state, payload) {
       state.channels = payload;
+    },
+    updateSelectedChannel(state, payload) {
+      if(payload) state.selectedChannel = payload;
+      else state.selectedChannel = state.channels[0].channelName;
     }
   },
   actions: {

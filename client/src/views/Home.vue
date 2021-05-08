@@ -17,8 +17,8 @@ export default {
     onBeforeMount(async() => {
       await store.dispatch('getChannels');
       if(store.state.channels.length !== 0) {
-        console.log('Hello');
-        router.push({ path: '/channels' })
+        router.push({ path: '/channels' });
+        store.commit('updateSelectedChannel');
       } else router.push({ path: '/createChannel' })
     });
     return {

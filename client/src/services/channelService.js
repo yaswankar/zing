@@ -29,6 +29,19 @@ class ChannelService {
             return error.response.data;
         });
     }
+
+    addUser(payload) {
+        const URL = `${this.base_url}/channel`;
+        return this.axios({
+            method: 'patch',
+            url: URL,
+            data: payload
+        }).then((response) => {
+            return response.data;
+        }, (error) => {
+            return error.response.data;
+        });
+    }
 }
 
 export default new ChannelService;

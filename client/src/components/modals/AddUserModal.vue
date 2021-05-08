@@ -1,16 +1,16 @@
 <template>
-  <center-pane-modal :show="showChannelCreateModal" @close="close">
+  <center-pane-modal :show="showAddUserModal" @close="close">
     <div class="modal-container">
         <div class="title">
-            <span>Create Channel</span>
+            <span>Add User</span>
             <span class="close-modal" @click="$emit('close', false)">&#10005;</span>
         </div>
         <div class="description">
-            <p>A channel is a lightweight space where you can communicate and collaborate with anyone to get work done</p>
-            <div class="channel-header">Channel Name</div>
-            <input class="channel-name" type="text" v-model="channelName">
+            <p>The user will be able to view all the messages posted in this channel</p>
+            <div class="channel-header">User Email</div>
+            <input class="channel-name" type="email" v-model="userMail">
             <div class="actions">
-                <button @click="createChannel">Create</button>
+                <button @click="addUser">Add</button>
                 <button @click="$emit('close', false)">Cancel</button>
             </div>
         </div>
@@ -19,15 +19,14 @@
 </template>
 
 <script>
-import {ref, inject} from 'vue';
-import {useRouter} from 'vue-router';
+import {ref, inject, onBeforeUnmount} from 'vue';
 import CenterPaneModal from '../modals/CenterPaneModal.vue';
 import { useStore } from 'vuex';
 
 export default {
-    name: 'create-channel-modal',
+    name: 'add-user-modal',
     props: [
-        'showChannelCreateModal'
+        'showAddUserModal'
     ],
     emits: [
         'close'
@@ -36,23 +35,23 @@ export default {
         CenterPaneModal
     },
     setup(props, context) {
-        const channelName = ref('');
+        const userMail = ref('');
         const $zingService = inject('$zingService');
         const store = useStore();
-        const router = useRouter();
-        const createChannel = () => {
-            $zingService.Channel.createChannel({ channelName: channelName.value, user: store.state.currentUser.email})
+        const addUser = () => {
+            $zingService.Channel.addUser({ channelName: store.state.selectedChannel, user: userMail.value})
             .then(async() => {
                 await store.dispatch('getChannels');
-                store.commit('updateSelectedChannel');
-                if(router.currentRoute._value.fullPath === '/createChannel') router.push('/channels');
-                channelName.value = '';
+                userMail.value = '';
                 context.emit('close');
             });
         }
+        onBeforeUnmount(() => {
+            userMail.value = '';
+        });
         return {
-            channelName,
-            createChannel
+            userMail,
+            addUser
         }
     }
 

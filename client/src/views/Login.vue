@@ -55,7 +55,7 @@ export default {
             firebase.auth().signInWithEmailAndPassword(email.value.trim(), password.value).then(data =>
                 console.log(data)).catch(err => alert(err.message));
             }
-         const Register = () => {
+         const register = () => {
             firebase.auth().createUserWithEmailAndPassword(email.value.trim(), password.value)
             .then(async () => {
                 await $zingService.User.createUser({userName: email.value})
@@ -66,7 +66,7 @@ export default {
             login,
             email,
             password,
-            Register
+            register
         }
     }
 }
